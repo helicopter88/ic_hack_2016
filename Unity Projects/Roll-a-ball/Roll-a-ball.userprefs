@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\Space Shooter\Assets\Scripts\PlayerController.cs">
+    <Files>
+      <File FileName="..\Space Shooter\Assets\Scripts\Mover.cs" Line="15" Column="1" />
+      <File FileName="..\Space Shooter\Assets\Scripts\PlayerController.cs" Line="28" Column="24" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
