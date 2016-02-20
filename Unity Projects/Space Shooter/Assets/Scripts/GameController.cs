@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Thalmic.Myo;
+using UnityEngine.SceneManagement;
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 
 public class GameController : MonoBehaviour 
 {
@@ -19,8 +23,9 @@ public class GameController : MonoBehaviour
 	private bool gameOver;
 	private bool restart;
 
+    public GameObject myo = null;
 
-	void Start()
+    void Start()
 	{
 		gameOver = false;
 		restart = false;
@@ -34,12 +39,14 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
+        if (Input.GetKeyDown(KeyCode.Escape)) { Application.Quit(); }
 
 		if (restart) {
-			if (Input.GetTouch(0).phase == TouchPhase.Began)
+			if (thalmicMyo.pose == Pose.Fist)
 			{
-				Application.LoadLevel(Application.loadedLevel);
+				SceneManager.LoadScene("Main");
+                //ExtendUnlockAndNotifyUserAction(thalmicMyo);
 			}
 
 		}
@@ -87,6 +94,16 @@ public class GameController : MonoBehaviour
 
 	}
 
+    void ExtendUnlockAndNotifyUserAction(ThalmicMyo myo)
+    {
+        ThalmicHub hub = ThalmicHub.instance;
 
+        if (hub.lockingPolicy == LockingPolicy.Standard)
+        {
+            myo.Unlock(UnlockType.Timed);
+        }
+
+        myo.NotifyUserAction();
+    }
 
 }

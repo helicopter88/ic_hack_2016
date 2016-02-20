@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Thalmic.Myo;
+using LockingPolicy = Thalmic.Myo.LockingPolicy;
+using Pose = Thalmic.Myo.Pose;
+using Quaternion = UnityEngine.Quaternion;
+using UnlockType = Thalmic.Myo.UnlockType;
+using Vector3 = UnityEngine.Vector3;
+using VibrationType = Thalmic.Myo.VibrationType;
 
 [System.Serializable]
 public class Boundary
@@ -10,8 +17,10 @@ public class Boundary
 
 public class PlayerController : MonoBehaviour 
 {
+    public GameObject myo = null;
 
-	public float speed;
+
+    public float speed;
 	public float tilt;
 	public Boundary boundary;
 
@@ -23,18 +32,25 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetButton("Fire1") && (Time.time > nextFire))
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
+        
+        if (thalmicMyo.pose == Pose.FingersSpread && (Time.time > nextFire))
 		{
 
-			GetComponent<AudioSource>().Play();
+            GetComponent<AudioSource>().Play();
 			nextFire = Time.time + fireRate;
 			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-		}
-	}
+            ExtendUnlockAndNotifyUserAction(thalmicMyo);
+
+        }
+    }
 
 	void FixedUpdate() 
 	{
-		float moveHorizontal = Input.acceleration.x;
+        ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
+        //new Vector3(myo.transform.forward.x, 0, myo.transform.forward.z),
+
+	    float moveHorizontal = -myo.transform.forward.x;
 		float moveVertical = Input.acceleration.y;
 
 		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
@@ -50,4 +66,16 @@ public class PlayerController : MonoBehaviour
 
 		GetComponent<Rigidbody> ().rotation = Quaternion.Euler (0.0f, 0.0f, GetComponent<Rigidbody>().velocity.x * - tilt);
 	}
+
+    void ExtendUnlockAndNotifyUserAction(ThalmicMyo myo)
+    {
+        ThalmicHub hub = ThalmicHub.instance;
+
+        if (hub.lockingPolicy == LockingPolicy.Standard)
+        {
+            myo.Unlock(UnlockType.Timed);
+        }
+
+        myo.NotifyUserAction();
+    }
 }
