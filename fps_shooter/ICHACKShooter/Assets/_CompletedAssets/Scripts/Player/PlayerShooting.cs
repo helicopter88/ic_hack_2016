@@ -1,5 +1,12 @@
 ﻿using UnityEngine;
 using UnitySampleAssets.CrossPlatformInput;
+using Thalmic.Myo;
+using LockingPolicy = Thalmic.Myo.LockingPolicy;
+using Pose = Thalmic.Myo.Pose;
+using Quaternion = UnityEngine.Quaternion;
+using UnlockType = Thalmic.Myo.UnlockType;
+using Vector3 = UnityEngine.Vector3;
+using VibrationType = Thalmic.Myo.VibrationType;
 
 namespace CompleteProject
 {
@@ -8,7 +15,7 @@ namespace CompleteProject
         public int damagePerShot = 20;                  // The damage inflicted by each bullet.
         public float timeBetweenBullets = 0.15f;        // The time between each shot.
         public float range = 100f;                      // The distance the gun can fire.
-
+		public GameObject myo = null;
 
         float timer;                                    // A timer to determine when to fire.
         Ray shootRay;                                   // A ray from the gun end forwards.
@@ -40,10 +47,11 @@ namespace CompleteProject
         {
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
-
+			ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
-			if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+			if(thalmicMyo.pose == Pose.FingersSpread && timer >= timeBetweenBullets && Time.timeScale != 0)
+			//if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
                 Shoot ();
