@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using Thalmic.Myo;
 using LockingPolicy = Thalmic.Myo.LockingPolicy;
 using Pose = Thalmic.Myo.Pose;
@@ -49,7 +50,7 @@ namespace CompleteProject
 			ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
-			if(thalmicMyo.pose == Pose.FingersSpread && timer >= timeBetweenBullets && Time.timeScale != 0)
+			if(Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
 			//if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
@@ -106,14 +107,14 @@ namespace CompleteProject
             shootRay.direction = transform.forward;
 
             // Perform the raycast against gameobjects on the shootable layer and if it hits something...
-            if(Physics.Raycast (shootRay, out shootHit, range, shootableMask))
+			if(Physics.Raycast (shootRay, out shootHit, range, Int32.MaxValue))
             {
                 // Try and find an EnemyHealth script on the gameobject hit.
                 EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
-
                 // If the EnemyHealth component exist...
                 if(enemyHealth != null)
                 {
+					Debug.Log ("Shoot");
                     // ... the enemy should take damage.
                     enemyHealth.TakeDamage (damagePerShot, shootHit.point);
                 }

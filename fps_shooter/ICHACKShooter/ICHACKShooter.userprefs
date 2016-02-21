@@ -1,9 +1,26 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_CompletedAssets/Scripts/Player/PlayerShooting.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Standard Assets/CrossPlatformInput/Scripts/TouchPad.cs">
     <Files>
-      <File FileName="Assets/_CompletedAssets/Scripts/Player/PlayerShooting.cs" Line="1" Column="1" />
+      <File FileName="Assets/Standard Assets/Characters/FirstPersonCharacter/Scripts/RigidbodyFirstPersonController.cs" Line="3" Column="26" />
+      <File FileName="Assets/Standard Assets/CrossPlatformInput/Scripts/TouchPad.cs" Line="41" Column="1" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ICHACKShooter" expanded="True">
+            <Node name="Assembly-CSharp" expanded="True" />
+            <Node name="Assembly-CSharp-Editor" expanded="True" />
+            <Node name="Assembly-CSharp-firstpass" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.NUnit.TestPad">
+        <State name="__root__">
+          <Node name="ICHACKShooter" expanded="True" selected="True" />
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
