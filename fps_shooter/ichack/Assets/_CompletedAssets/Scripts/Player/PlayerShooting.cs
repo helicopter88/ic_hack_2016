@@ -50,7 +50,7 @@ namespace CompleteProject
 			ThalmicMyo thalmicMyo = myo.GetComponent<ThalmicMyo>();
 #if !MOBILE_INPUT
             // If the Fire1 button is being press and it's time to fire...
-			if(Input.GetButton("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+			if(thalmicMyo.pose == Pose.FingersSpread && timer >= timeBetweenBullets && Time.timeScale != 0)
 			//if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
             {
                 // ... shoot the gun.
