@@ -7,6 +7,8 @@ using Quaternion = UnityEngine.Quaternion;
 using UnlockType = Thalmic.Myo.UnlockType;
 using Vector3 = UnityEngine.Vector3;
 using VibrationType = Thalmic.Myo.VibrationType;
+using UnitySampleAssets;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace CompleteProject
 {
